@@ -2,3 +2,5 @@ ipykernel
 opencv-python
 matplotlib
 numpy
+flake8
+black
