@@ -20,9 +20,19 @@ image_directory = os.path.join(project_directory, "images")
 
 LOGGER = logging.getLogger(__name__)
 
+DEFAULT_PARAMS = {
+    "lower_threshold": 100,
+    "upper_threshold": 200,
+    "rho": 1,
+    "theta": np.pi / 180,
+    "threshold": 100,
+    "min_line_length": 100,
+    "max_line_gap": 10,
+}
+
 
 def main():
-    st.set_page_config(page_title="Lane Detection App", page_icon=":car:")
+    st.set_page_config(page_title="Lane Detection App", page_icon="🛣️")
 
     st.title("🛣️ Lane Detection")
 
@@ -36,15 +46,33 @@ def main():
     st.sidebar.title("⚙️ Adjust Parameters")
 
     st.sidebar.subheader("Canny Edge Detection Parameters")
-    lower_threshold = st.sidebar.slider("🔽 Lower Threshold", 0, 255, 100)
-    upper_threshold = st.sidebar.slider("🔼 Upper Threshold ", 0, 255, 200)
+    lower_threshold = st.sidebar.slider(
+        "🔽 Lower Threshold", 0, 255, DEFAULT_PARAMS["lower_threshold"]
+    )
+    upper_threshold = st.sidebar.slider(
+        "🔼 Upper Threshold ", 0, 255, DEFAULT_PARAMS["upper_threshold"]
+    )
 
     st.sidebar.subheader("Hough Transform Parameters")
-    rho = st.sidebar.slider("Rho", 1, 10, 1)
-    theta = st.sidebar.slider("Theta", 0.0, np.pi / 2, np.pi / 180)
-    threshold = st.sidebar.slider("Threshold", 1, 500, 100)
-    min_line_length = st.sidebar.slider("Min Line Length", 1, 500, 100)
-    max_line_gap = st.sidebar.slider("Max Line Gap", 1, 100, 10)
+    rho = st.sidebar.slider("Rho", 1, 10, DEFAULT_PARAMS["rho"])
+    theta = st.sidebar.slider("Theta", 0.0, np.pi / 2, DEFAULT_PARAMS["theta"])
+    threshold = st.sidebar.slider("Threshold", 1, 500, DEFAULT_PARAMS["threshold"])
+    min_line_length = st.sidebar.slider(
+        "Min Line Length", 1, 500, DEFAULT_PARAMS["min_line_length"]
+    )
+    max_line_gap = st.sidebar.slider(
+        "Max Line Gap", 1, 100, DEFAULT_PARAMS["max_line_gap"]
+    )
+
+    # Reset button
+    if st.sidebar.button("Reset Parameters"):
+        lower_threshold = DEFAULT_PARAMS["lower_threshold"]
+        upper_threshold = DEFAULT_PARAMS["upper_threshold"]
+        rho = DEFAULT_PARAMS["rho"]
+        theta = DEFAULT_PARAMS["theta"]
+        threshold = DEFAULT_PARAMS["threshold"]
+        min_line_length = DEFAULT_PARAMS["min_line_length"]
+        max_line_gap = DEFAULT_PARAMS["max_line_gap"]
 
     # Display the results
     st.subheader("Original Image")
@@ -96,7 +124,7 @@ def main():
     refined_detected_lines_and_edges = cv2.bitwise_and(
         refined_lines_and_edges_image, refined_lines_and_edges_image, mask=roi_mask
     )
-    st.subheader("Edgeds and Lines with mask applied")
+    st.subheader("Edges and Lines with mask applied")
     st.image(
         cv2.cvtColor(refined_detected_lines_and_edges, cv2.COLOR_BGR2RGB),
         use_column_width=True,
