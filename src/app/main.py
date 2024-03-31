@@ -48,12 +48,15 @@ def main():
     st.sidebar.title("⚙️ Adjust Parameters")
 
     st.sidebar.subheader("Canny Edge Detection Parameters")
-    lower_threshold = st.sidebar.slider(
-        "🔽 Lower Threshold", 0, 255, DEFAULT_PARAMS["lower_threshold"]
-    )
-    upper_threshold = st.sidebar.slider(
-        "🔼 Upper Threshold ", 0, 255, DEFAULT_PARAMS["upper_threshold"]
-    )
+    col1, col2 = st.sidebar.columns(2)
+    with col1:
+        lower_threshold = st.slider(
+            "🔽 Lower Threshold", 0, 255, DEFAULT_PARAMS["lower_threshold"]
+        )
+    with col2:
+        upper_threshold = st.slider(
+            "🔼 Upper Threshold ", 0, 255, DEFAULT_PARAMS["upper_threshold"]
+        )
     gaussian_blur_kernel_size = st.sidebar.slider(
         "Gaussian Blur Kernel Size",
         1,
