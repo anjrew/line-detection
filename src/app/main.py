@@ -33,10 +33,13 @@ def main():
     image = cv2.imread(image_path)
 
     # Set up the sidebar for parameter sliders
-    st.sidebar.title("Adjust Parameters")
+    st.sidebar.title("⚙️ Adjust Parameters")
 
-    lower_threshold = st.sidebar.slider("Lower Threshold", 0, 255, 100)
-    upper_threshold = st.sidebar.slider("Upper Threshold", 0, 255, 200)
+    st.sidebar.subheader("Canny Edge Detection Parameters")
+    lower_threshold = st.sidebar.slider("🔽 Lower Threshold", 0, 255, 100)
+    upper_threshold = st.sidebar.slider("🔼 Upper Threshold ", 0, 255, 200)
+
+    st.sidebar.subheader("Hough Transform Parameters")
     rho = st.sidebar.slider("Rho", 1, 10, 1)
     theta = st.sidebar.slider("Theta", 0.0, np.pi / 2, np.pi / 180)
     threshold = st.sidebar.slider("Threshold", 1, 500, 100)
@@ -114,7 +117,7 @@ def main():
         refined_detected_line, cv2.COLOR_GRAY2BGR
     )
     # Create a mask for the non-zero pixels (lines)
-    line_mask = cv2.inRange(refined_detected_line, 1, 255)
+    line_mask = cv2.inRange(refined_detected_line, 1, 255)  # type: ignore
     # Create a bright red color image
     bright_red = np.zeros_like(refined_detected_line_color)
     bright_red[line_mask != 0] = [0, 0, 255]  # Bright red color (B, G, R)
