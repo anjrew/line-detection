@@ -1,6 +1,5 @@
 {
     "recommendations": [
-        "ms-python.python",
         "ms-python.vscode-pylance",
         "ms-azuretools.vscode-docker",
         "GitHub.copilot",
@@ -13,6 +12,10 @@
         "ms-toolsai.jupyter",
         "ms-toolsai.jupyter-keymap",
         "ms-toolsai.vscode-jupyter-cell-tags",
-        "ms-toolsai.jupyter-renderers"
+        "ms-toolsai.jupyter-renderers",
+        "ms-vscode-remote.remote-containers",
+        "ms-python.debugpy",
+        "donjayamanne.python-environment-manager",
+        "mgesbert.python-path"
     ]
 }
