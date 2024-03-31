@@ -96,3 +96,19 @@ pip install -r requirements.txt
 ```
 
 Remember to activate the Conda environment each time you work on this project.
+
+## Option 3: Using a Dev Container with VS Code
+
+Alternatively, you can use a dev container with Visual Studio Code for a pre-configured development environment. 
+
+This option is currently only verified to work on Linux systems.
+
+1. Install Docker on your system.
+2. Install the Remote - Containers extension in VS Code.
+3. Open the project folder in VS Code.
+4. Click on the button in the lower-left corner of the VS Code window and select "Remote-Containers: Reopen in Container".
+
+<div align="center">
+  <img src="./images/dev_containers_icon.png" alt="Dev Container Icon">
+</div>
+
