@@ -5,6 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Run Test GUI",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "streamlit",
+            "args": [
+                "run",
+                "${workspaceFolder}/src/app/main.py",
+                "--server.port",
+                "8501"
+            ],
+            "justMyCode": false,
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src:${env:PYTHONPATH}"
+            }
+        },
+        {
             "name": "Python: Current File",
             "type": "debugpy",
             "request": "launch",

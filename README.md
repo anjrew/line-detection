@@ -8,6 +8,11 @@ Before diving into the algorithms, make sure you have the required tools and lib
 
 1. [Setup your development environment](./docs/setting_up_the_environment.md).
 2. Take a look in the notebooks in the [src](./src/) folder to see examples of the algorithms in action.
+3. Run the testing streamlit application from the root folder.
+   1. Install the additional required libraries: ```pip install -r src/app/requirements.txt```
+   2. Navigate the the [src folder](./src/) and run the following command:
+      ```streamlit run app/main.py```
+
 
 ## 📚 Resources
 

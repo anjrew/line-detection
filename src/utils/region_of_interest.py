@@ -1,8 +1,11 @@
+import logging
 import cv2
 import numpy as np
 
+LOGGER = logging.getLogger(__name__)
 
-def create_region_of_interest(image: np.ndarray, vertices: np.ndarray):
+
+def create_region_of_interest_mask(image: np.ndarray, vertices: np.ndarray):
     """
     Creates a region of interest mask on the given image based on the provided vertices.
 
@@ -14,7 +17,7 @@ def create_region_of_interest(image: np.ndarray, vertices: np.ndarray):
         numpy.ndarray: The image with the region of interest masked.
 
     """
-    mask: np.ndarray = np.zeros_like(image)
-    white_color = 255
-    cv2.fillPoly(mask, vertices, white_color)  # type: ignore
-    return cv2.bitwise_and(image, mask)
+    LOGGER.debug("Creating region of interest mask")
+    roi_mask = np.zeros_like(image[:, :, 0], dtype=np.uint8)
+    cv2.fillPoly(roi_mask, [vertices], 255)  # type: ignore
+    return roi_mask
