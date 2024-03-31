@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import sys
@@ -81,6 +82,22 @@ def main():
         threshold = DEFAULT_PARAMS["threshold"]
         min_line_length = DEFAULT_PARAMS["min_line_length"]
         max_line_gap = DEFAULT_PARAMS["max_line_gap"]
+
+    # JSON representation of parameters
+    parameters = {
+        "lower_threshold": lower_threshold,
+        "upper_threshold": upper_threshold,
+        "gaussian_blur_kernel_size": gaussian_blur_kernel_size,
+        "rho": rho,
+        "theta": theta,
+        "threshold": threshold,
+        "min_line_length": min_line_length,
+        "max_line_gap": max_line_gap,
+    }
+
+    # Copy button
+    st.sidebar.subheader("Copy Parameters")
+    st.sidebar.code(json.dumps(parameters, indent=4))
 
     # Display the results
     st.subheader("Original Image")
