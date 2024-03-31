@@ -63,7 +63,7 @@ def main():
 
     st.sidebar.subheader("Hough Transform Parameters")
     rho = st.sidebar.slider("Rho", 1, 10, DEFAULT_PARAMS["rho"])
-    theta = st.sidebar.slider("Theta", 0.0, np.pi / 2, DEFAULT_PARAMS["theta"])
+    theta = st.sidebar.slider("Theta", 0.01, np.pi / 2, DEFAULT_PARAMS["theta"])
     threshold = st.sidebar.slider("Threshold", 1, 500, DEFAULT_PARAMS["threshold"])
     min_line_length = st.sidebar.slider(
         "Min Line Length", 1, 500, DEFAULT_PARAMS["min_line_length"]
@@ -106,8 +106,16 @@ def main():
         edges, rho, theta, threshold, min_line_length, max_line_gap
     )
 
-    st.subheader("Detected Lines")
-    st.image(cv2.cvtColor(lines_image, cv2.COLOR_BGR2RGB), use_column_width=True)
+    if lines_image is not None:
+        # Convert the grayscale lines_image to a 3-channel BGR image
+        lines_image_bgr = cv2.cvtColor(lines_image, cv2.COLOR_GRAY2BGR)
+
+        st.subheader("Detected Lines")
+        st.image(
+            cv2.cvtColor(lines_image_bgr, cv2.COLOR_BGR2RGB), use_column_width=True
+        )
+    else:
+        st.warning("No lines detected in the image.")
 
     # Define the vertices of the ROI polygon
     height, width = image.shape[:2]
@@ -166,10 +174,20 @@ def main():
     # Combine the original image with the colored refined_detected_line
     combined_refined_image = cv2.addWeighted(image, 1, bright_red, 2, 1)
     st.subheader("Masked Original Image with Detected Lines")
-
     st.image(
         cv2.cvtColor(combined_refined_image, cv2.COLOR_BGR2RGB), use_column_width=True
     )
+
+    # Create a mask for the non-zero pixels (lines)
+    line_mask = cv2.inRange(refined_detected_line, 1, 255)  # type: ignore
+    # Create a red color image
+    red_lines_image = np.zeros_like(lines_image_bgr)
+    red_lines_image[line_mask != 0] = [0, 0, 255]  # Red color (B, G, R)
+    # Draw the red lines on the original image
+    combined_image = cv2.bitwise_or(image, red_lines_image)
+
+    st.subheader("Original Image with Detected Lines")
+    st.image(cv2.cvtColor(combined_image, cv2.COLOR_BGR2RGB), use_column_width=True)
 
 
 if __name__ == "__main__":
