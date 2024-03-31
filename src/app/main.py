@@ -28,6 +28,7 @@ DEFAULT_PARAMS = {
     "threshold": 100,
     "min_line_length": 100,
     "max_line_gap": 10,
+    "gaussian_blur_kernel_size": 3,  # Default Gaussian blur kernel size
 }
 
 
@@ -51,6 +52,13 @@ def main():
     )
     upper_threshold = st.sidebar.slider(
         "🔼 Upper Threshold ", 0, 255, DEFAULT_PARAMS["upper_threshold"]
+    )
+    gaussian_blur_kernel_size = st.sidebar.slider(
+        "Gaussian Blur Kernel Size",
+        1,
+        19,
+        DEFAULT_PARAMS["gaussian_blur_kernel_size"],
+        step=2,
     )
 
     st.sidebar.subheader("Hough Transform Parameters")
@@ -79,7 +87,12 @@ def main():
     st.image(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), use_column_width=True)
 
     # Perform Canny edge detection on the ROI image
-    edges = create_canny_edge_detection_img(image, lower_threshold, upper_threshold)
+    edges = create_canny_edge_detection_img(
+        image,
+        lower_threshold,
+        upper_threshold,
+        (gaussian_blur_kernel_size, gaussian_blur_kernel_size),
+    )
 
     st.subheader("Edges")
     st.image(edges, use_column_width=True)
