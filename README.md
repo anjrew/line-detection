@@ -7,6 +7,7 @@ This repository is dedicated to the exploration and implementation of line detec
 Before diving into the algorithms, make sure you have the required tools and libraries installed.
 
 1. [Setup your development environment](./docs/setting_up_the_environment.md).
+2. Take a look in the notebooks in the [src](./src/) folder to see examples of the algorithms in action.
 
 ## 📚 Resources
 
