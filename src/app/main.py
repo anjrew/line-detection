@@ -10,9 +10,12 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from utils.edge_detection import create_canny_edge_detection_img
-from utils.hough_transform import hough_transform, get_hough_detected_lines_image
-from utils.region_of_interest import create_region_of_interest_mask
+from project_utils.edge_detection import create_canny_edge_detection_img
+from project_utils.hough_transform import (
+    hough_transform,
+    get_hough_detected_lines_image,
+)
+from project_utils.region_of_interest import create_region_of_interest_mask
 
 
 script_directory = os.path.dirname(__file__)
