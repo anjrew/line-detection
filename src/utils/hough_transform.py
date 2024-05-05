@@ -2,6 +2,28 @@ import cv2
 import numpy as np
 
 
+def get_hough_lines(
+    edges: np.ndarray,
+    rho: float = 1,
+    theta: float = np.pi / 180,
+    threshold: int = 100,
+    min_line_length: int = 100,
+    max_line_gap: int = 10,
+) -> np.ndarray:
+    lines = cv2.HoughLinesP(
+        edges,
+        rho=rho,
+        theta=theta,
+        threshold=threshold,
+        minLineLength=min_line_length,
+        maxLineGap=max_line_gap,
+    )
+
+    assert lines is not None, "No lines were detected."
+
+    return lines
+
+
 def hough_transform(
     edges: np.ndarray,  # output of the Canny edge detector
     rho: float = 1,  # distance resolution in pixels of the Hough grid
@@ -21,7 +43,7 @@ def hough_transform(
         maxLineGap=max_line_gap,
     )
 
-    # Create a copy of the original image to draw lines on
+    # Create a grayscale  copy of the original image to draw lines on
     line_image = cv2.cvtColor(edges, cv2.COLOR_GRAY2RGB)
 
     # Draw lines on the image

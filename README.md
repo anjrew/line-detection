@@ -17,3 +17,5 @@ Before diving into the algorithms, make sure you have the required tools and lib
 ## 📚 Resources
 
 - [Great Video on Line Detection](https://www.youtube.com/watch?v=eLTLtUVuuy4&t=3533s&ab_channel=ProgrammingKnowledge)
+- Road Image Link: https://github.com/rslim087a/road-image  (for Computer Vision tutorial 1)
+- Road Video Link: https://github.com/rslim087a/road-video (for last Computer Vision tutorial)

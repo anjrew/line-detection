@@ -4,3 +4,4 @@ matplotlib
 numpy
 flake8
 black
+streamlit
