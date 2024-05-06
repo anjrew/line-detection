@@ -69,9 +69,27 @@ def main():
     )
 
     st.sidebar.subheader("Hough Transform Parameters")
-    rho = st.sidebar.slider("Rho", 1, 10, DEFAULT_PARAMS["rho"])
-    theta = st.sidebar.slider("Theta", 0.01, np.pi / 2, DEFAULT_PARAMS["theta"])
-    threshold = st.sidebar.slider("Threshold", 1, 500, DEFAULT_PARAMS["threshold"])
+    rho = st.sidebar.slider(
+        "Rho",
+        1,
+        10,
+        DEFAULT_PARAMS["rho"],
+        help="Distance resolution of the accumulator in pixels",
+    )
+    theta = st.sidebar.slider(
+        "Theta",
+        0.01,
+        np.pi / 2,
+        DEFAULT_PARAMS["theta"],
+        help="The resolution of the parameter space (in radians)",
+    )
+    threshold = st.sidebar.slider(
+        "Threshold",
+        1,
+        500,
+        DEFAULT_PARAMS["threshold"],
+        help="The minimum number of votes (intersections in Hough grid cell)",
+    )
     min_line_length = st.sidebar.slider(
         "Min Line Length", 1, 500, DEFAULT_PARAMS["min_line_length"]
     )
